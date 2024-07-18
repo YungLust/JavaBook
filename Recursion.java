@@ -10,6 +10,7 @@ class Recursion {
     public static void main(String[] args) {
         Factorial f = new Factorial();
         int n = 12;
+        n = Math.abs(n);
         System.out.println("Factorial of " + n + " = " + f.fact(n));
     }
 }
