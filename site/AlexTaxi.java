@@ -3,7 +3,7 @@ public class AlexTaxi {
     private double calc_price;
     private double standart_price = 0.5 ;
     private double comfort_price = 0.55;
-    private double business_price = 0.7;
+    private double business_price = 0.65;
     private double minivan_price = 0.7;
 
     //methods to display different tarifs` price 
@@ -48,8 +48,9 @@ public class AlexTaxi {
 
     public static void main(String[] args) {
         AlexTaxi alex = new AlexTaxi();
-        //from Dnipro to Kyiv
-        double distance = 478;
+        //from Kharkiv to Zaporizhzhia
+        double distance = 300;
+        System.out.println("Distance: "+distance+" km\n");
         alex.calc_standart(distance);
         alex.calc_comfort(distance);
         alex.calc_business(distance);
