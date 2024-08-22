@@ -27,7 +27,7 @@ public class AlexTaxi {
     //method to get rounded price
     private int roundPrice(double price){
         //get rid of float
-        System.out.println(price);
+        //System.out.println(price);
         int rounded_price = (int) Math.ceil(price);
 
         // Get the last digit
@@ -45,10 +45,11 @@ public class AlexTaxi {
         }
         return rounded_price;
         }
-        
+
     public static void main(String[] args) {
         AlexTaxi alex = new AlexTaxi();
-        double distance = 85;
+        //from Dnipro to Kyiv
+        double distance = 478;
         alex.calc_standart(distance);
         alex.calc_comfort(distance);
         alex.calc_business(distance);
