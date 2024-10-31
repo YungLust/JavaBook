@@ -60,8 +60,10 @@ public class Game {
             System.out.println("You have a new record!");
             System.out.printf("You guessed the number still having %d attempts", record);
         }
+        playAgain();
+    }
 
-        //scan user input
+    private void playAgain(){
         String userInput = sc.next();
 
         userInput = userInput.toLowerCase();
@@ -73,26 +75,15 @@ public class Game {
             System.out.println("\n\n");
             start();
         }
-
-        //end game if else
         else {
-            System.out.println("Your current record is: " + record);
-            System.out.printf("You managed to guess the number in %d attempts\n", record);
-            System.out.println("\nSee you next time!");
+            endGame();
         }
     }
 
-    private void lose() {
-        System.out.println("You lose");
-    }
-
-
-    public void setAttempts(int attempts) {
-        this.attempts = attempts;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
+    private void endGame(){
+        System.out.println("Your current record is: " + record);
+        System.out.printf("You managed to guess the number in %d attempts\n", record);
+        System.out.println("\nSee you next time!");
     }
 
     public void changeDifficulty(Difficulties diff) {
@@ -115,6 +106,20 @@ public class Game {
                 attempts = defaultAttempts;
                 max = defaultMax;
         }
+    }
+
+
+    private void lose() {
+        System.out.println("You lose");
+    }
+
+
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
 }
