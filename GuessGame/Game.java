@@ -12,6 +12,7 @@ public class Game {
     private final static Scanner sc = new Scanner(System.in);
 
     public void start() {
+        record = attempts;
         final int secret = makeSecret();
         System.out.println("I am thinking of a number");
         System.out.println("It is not more than " + max);
@@ -88,6 +89,28 @@ public class Game {
 
     public void setMax(int max) {
         this.max = max;
+    }
+
+    public void changeDifficulty(Difficulties diff){
+        switch (diff){
+            case EASY:
+                attempts = 5;
+                max = 10;
+                break;
+            case NORMAL:
+                attempts = 10;
+                max = 20;
+                break;
+            case HARD:
+                attempts = 12;
+                max = 30;
+            case IMPOSSIBLE:
+                attempts = 25;
+                max = 100;
+            default:
+                attempts = defaultAttempts;
+                max = defaultMax;
+        }
     }
 
 }
