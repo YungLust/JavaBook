@@ -13,7 +13,6 @@ public class Game {
     private final static Scanner sc = new Scanner(System.in);
 
     public void start() {
-        record = attempts;
         final int secret = makeSecret();
         System.out.println("I am thinking of a number");
         System.out.println("It is not more than " + max);
@@ -51,19 +50,19 @@ public class Game {
     }
 
     private void win(int remainingAttempts) {
-        System.out.println("You guessed it!\nCongratulations");
-        System.out.println("Would you like to play again? [Y/n]");
+        System.out.println("You've guessed it!\nCongratulations!");
 
         //get record
         if (remainingAttempts > record) {
             record = remainingAttempts;
             System.out.println("You have a new record!");
-            System.out.printf("You guessed the number still having %d attempts", record);
+            System.out.printf("You guessed the number still having %d attempts\n", record);
         }
         playAgain();
     }
 
     private void playAgain(){
+        System.out.println("Would you like to play again? [Y/n]");
         String userInput = sc.next();
 
         userInput = userInput.toLowerCase();
@@ -111,6 +110,7 @@ public class Game {
 
     private void lose() {
         System.out.println("You lose");
+        playAgain();
     }
 
 
