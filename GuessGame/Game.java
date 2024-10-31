@@ -9,7 +9,7 @@ public class Game {
     private int max = defaultMax;
     private int attempts = defaultAttempts;
     private int record;
-
+    private final static Scanner sc = new Scanner(System.in);
 
     public void start() {
         final int secret = makeSecret();
@@ -34,7 +34,6 @@ public class Game {
         return r.nextInt(0,max);
     }
     private int takeGuess(){
-        Scanner sc = new Scanner(System.in);
         System.out.print("Your guess: ");
         int guess = sc.nextInt();
         System.out.print("\n");
@@ -47,18 +46,17 @@ public class Game {
 
     }
     private void win(int attempts){
-        System.out.println("You guessed it!\n Congratulations, you have won!");
+        System.out.println("You guessed it!\nCongratulations");
         System.out.println("Would you like to play again? [Y/n]");
 
         //get record
-        if (attempts < getRecord()){
-            setRecord(attempts);
+        if (attempts < record){
+            record = attempts;
             System.out.println("You have a new record!");
             System.out.printf("You guessed the number in %d attempts",attempts);
         }
 
         //scan user input
-        Scanner sc = new Scanner(System.in);
         String userInput = sc.next();
 
         userInput = userInput.toLowerCase();
@@ -73,12 +71,10 @@ public class Game {
 
         //end game if else
         else {
-            int currentRecord = getRecord();
-            System.out.println("Your current record is: "+currentRecord);
-            System.out.printf("You managed to guess the number in %d attempts\n",currentRecord);
+            System.out.println("Your current record is: "+record);
+            System.out.printf("You managed to guess the number in %d attempts\n",record);
             System.out.println("\nSee you next time!");
         }
-        sc.close();
     }
 
     private void lose(){
@@ -94,10 +90,4 @@ public class Game {
         this.max = max;
     }
 
-    private void setRecord(int attempts) {
-    }
-
-    public int getRecord(){
-        return record;
-    }
 }
