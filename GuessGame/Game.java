@@ -13,21 +13,26 @@ public class Game {
     private final static Scanner sc = new Scanner(System.in);
 
     public void start() {
+        int currAttempts = attempts;
+        int prevGuess = -1;
         final int secret = makeSecret();
         System.out.println("I am thinking of a number");
         System.out.println("It is not more than " + max);
         System.out.printf("You have %d attempts to guess it\n", attempts);
 
-        for (int i = attempts; i > 0; i--) {
+        while (currAttempts != 0) {
             int guess = takeGuess();
             if (guess == secret) {
-                win(i);
-            } else if (i != 1) {
-                giveHint(guess);
-                System.out.printf("You have %d attempts left\n", i - 1);
+                win(currAttempts);
+            } else if (currAttempts != 1) {
+                System.out.println(getHint(guess,prevGuess,secret));
+                System.out.printf("You have %d attempts left\n", currAttempts - 1);
+
             } else {
                 lose();
             }
+            prevGuess = guess;
+            currAttempts--;
         }
     }
 
@@ -37,16 +42,33 @@ public class Game {
     }
 
     private int takeGuess() {
-        System.out.print("Your guess: ");
-        int guess = sc.nextInt();
-        System.out.print("\n");
+        boolean inputValid = false;
+        int guess = 0;
+        while (!inputValid) {
+            System.out.print("Your guess: ");
+            guess = sc.nextInt();
+            System.out.print("\n");
+            if (guess > max || guess < 0){
+                System.out.println("Dont be silly.");
+            }
+            else {
+                inputValid = true;
+            }
+        }
 
         return guess;
     }
 
-    private void giveHint(int guess) {
-        System.out.println("Hint!");
+    private String getHint(int guess, int prevGuess, int secret) {
+        String hint;
 
+        if (prevGuess == -1){
+            hint = Math.abs(secret - guess) < (max/2) ? "Warm" : "Cold";
+        }
+        else{
+            hint = Math.abs(secret - guess) < Math.abs(secret-prevGuess) ? "Warmer" : "Colder";
+        }
+        return hint;
     }
 
     private void win(int remainingAttempts) {
@@ -61,7 +83,7 @@ public class Game {
         playAgain();
     }
 
-    private void playAgain(){
+    private void playAgain() {
         System.out.println("Would you like to play again? [Y/n]");
         String userInput = sc.next();
 
@@ -73,13 +95,12 @@ public class Game {
         if (yesResponses.contains(userInput) || userInput.isEmpty()) {
             System.out.println("\n\n");
             start();
-        }
-        else {
+        } else {
             endGame();
         }
     }
 
-    private void endGame(){
+    private void endGame() {
         System.out.println("Your current record is: " + record);
         System.out.printf("You managed to guess the number in %d attempts\n", record);
         System.out.println("\nSee you next time!");
