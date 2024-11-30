@@ -17,13 +17,13 @@ class Main{
 
         //draw figures
         DrawRectangle drawRect = new DrawRectangle(roundedAdapter);
-        drawRect.draw();
+        drawRect.draw(0,0);
         System.out.println("\n");
         drawRect.setRectangle(polygonAdapter);
-        drawRect.draw();
+        drawRect.draw(2,2);
         System.out.println("\n");
         drawRect.setRectangle(rect);
-        drawRect.draw();
+        drawRect.draw(8,4);
 
     }
 }
