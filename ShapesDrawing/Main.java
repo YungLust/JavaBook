@@ -1,4 +1,6 @@
 package ShapesDrawing;
+
+import ShapesDrawing.DrawingStrategies.*;
 /**
  * In main class we create rectangles from different figures and draw them
  */
@@ -15,15 +17,21 @@ class Main{
         RectangleAdapter roundedAdapter = new RectangleAdapter(roundedRect);
         RectangleAdapter polygonAdapter = new RectangleAdapter(polygon);
 
-        //draw figures
-        DrawRectangle drawRect = new DrawRectangle(roundedAdapter);
-        drawRect.draw(0,0);
-        System.out.println("\n");
-        drawRect.setRectangle(polygonAdapter);
+        // initialize strategies
+        FileDraw fileStrat = new FileDraw();
+        TerminalDraw terminalStrat = new TerminalDraw();
+
+        // using TerminalDraw strat
+        DrawRectangle drawRect = new DrawRectangle(rect,terminalStrat);
         drawRect.draw(2,2);
-        System.out.println("\n");
-        drawRect.setRectangle(rect);
-        drawRect.draw(8,4);
+
+        //using FileDraw strat
+        drawRect.setStrategy(fileStrat);
+        fileStrat.cleanCanvas();
+        drawRect.draw(0,0);
+        drawRect.draw(2,1);
+
+
 
     }
 }
